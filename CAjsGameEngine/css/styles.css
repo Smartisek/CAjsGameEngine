@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ff0000; /* Red background color */
+    background-color: rgb(145, 44, 188); /* Red background color */
 }
 
 /* Add border to the canvas element */
