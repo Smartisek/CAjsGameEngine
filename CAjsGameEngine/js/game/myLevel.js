@@ -20,11 +20,11 @@ class myLevel extends Game {
         const platformWidth = 500;
         const platforms = [
             // First floor 
-            new Platform(-20, this.canvas.height/2, platformWidth*2, 20),
+            new Platform(-20, this.canvas.height/2, platformWidth*2, 150),
             
             // Second floor 
-            new Platform(55, 200, platformWidth,20),
-            new Platform(700, 200, platformWidth, 20),
+            new Platform(55, 110, platformWidth,150),
+            new Platform(700, 110, platformWidth, 150),
         ];
 
         for (const platform of platforms) {
@@ -33,8 +33,7 @@ class myLevel extends Game {
 
         const ladders = [
             new Ladder(850, 0),
-            new Ladder(100, 200),
-            new Ladder(180, 200),
+            new Ladder(100, 170),
         ]
 
         for(const ladder of ladders){

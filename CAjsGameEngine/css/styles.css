@@ -11,4 +11,6 @@ body {
 /* Add border to the canvas element */
 canvas {
     border: 1px solid #fff; /* 1 pixel solid white border */
+        background-image: url('../resources/images/map/graveyard.png');
+        background-position: center;
 }
