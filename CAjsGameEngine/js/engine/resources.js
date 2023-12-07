@@ -13,7 +13,7 @@ const AudioFiles = {
 };
 
 // Set the source of the player image.
-Images.player.src = './resources/images/player/player.jpg'; // Update the image path
+Images.player.src = './resources/images/player/mainPlayer.png'; // Update the image path
 
 // Set the source of the enemy image.
 Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path

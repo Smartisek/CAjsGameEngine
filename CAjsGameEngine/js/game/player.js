@@ -8,6 +8,7 @@ import Enemy from './enemy.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
+import Ladder from '../game/ladder.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -30,6 +31,7 @@ class Player extends GameObject {
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
+    this.isOnLadder = 0;
   }
 
   // The update function runs every frame and contains game logic
@@ -51,7 +53,7 @@ class Player extends GameObject {
     }
 
     // Handle player jumping
-    if (!this.isGamepadJump && input.isKeyDown('ArrowUp') && this.isOnPlatform) {
+    if (!this.isGamepadJump && input.isKeyDown('Space') && this.isOnPlatform) {
       this.startJump();
     }
 
@@ -67,7 +69,19 @@ class Player extends GameObject {
         this.game.removeGameObject(collectible);
       }
     }
-  
+
+    // handle collision with ladders, if we are colliding with it set boolean to true otherwise set it to false so player can go up
+    // anywhere else 
+    const ladders = this.game.gameObjects.filter((obj) => obj instanceof Ladder);
+    for(const ladder of ladders){
+      if(physics.isColliding(ladder.getComponent(Physics))){
+        this.isOnLadder = true;
+      }else{
+        this.isOnLadder = false;
+      }
+      
+    }
+
     // Handle collisions with enemies
     const enemies = this.game.gameObjects.filter((obj) => obj instanceof Enemy);
     for (const enemy of enemies) {
@@ -76,7 +90,7 @@ class Player extends GameObject {
       }
     }
   
-    // Handle collisions with platforms
+    // Handle collisions with platforms and ladder 
     this.isOnPlatform = false;  // Reset this before checking collisions with platforms
     const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
     for (const platform of platforms) {
@@ -86,6 +100,11 @@ class Player extends GameObject {
           physics.acceleration.y = 0;
           this.y = platform.y - this.renderer.height;
           this.isOnPlatform = true;
+        }
+        if(this.isOnLadder && input.isKeyDown('ArrowUp')){
+          physics.velocity.y = 0;
+          physics.acceleration.y = 0;
+          this.handleLadder();
         }
       }
     }
@@ -152,6 +171,14 @@ class Player extends GameObject {
       this.getComponent(Physics).velocity.y = -this.jumpForce;
       this.isOnPlatform = false;
     }
+  }
+
+  // function for going up a ladder 
+  handleLadder(){
+  if(this.isOnLadder){
+    this.getComponent(Physics).velocity.y = -365;
+    console.log("on ladder");
+   }
   }
   
   updateJump(deltaTime) {
