@@ -82,7 +82,7 @@ class Player extends GameObject {
 
     const trampolines = this.game.gameObjects.filter((obj) => obj instanceof Trampoline);
     for(const trampoline of trampolines){
-      if(physics.isColliding(trampoline.getComponent(Physics))){
+      if(physics.isCollidingCircleRect(trampoline.getComponent(Physics))){
         this.isOnTrampoline = true;
       } else {
         this.isOnTrampoline = false;

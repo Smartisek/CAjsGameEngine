@@ -47,17 +47,32 @@ class Physics extends Component {
   }
 
   isCollidingCircleRect(otherPhysics){
-    // const[left, right, top, bottom] = this.getBoundingBox();
-    const[circleX, circleY, radiusX, radiusY] = this.getCircle();
-    const distX = this.gameObject.x - circleX;
-    const distY = this.gameObject.y - circleY;
-    const distance = Math.sqrt( (distX*distX) + (distY*distY) );
-     
-    if(distance <= radiusX+radiusY){
+    const[left, right, top, bottom] = otherPhysics.getBoundingBox();
+    const [circleX, circleY, radiusX, radiusY] = this.getCircle();
+    let testX = circleX;
+    // test width edge
+    if(circleX < left){
+      testX = left;
+    } else if(circleX > right){
+      testX = right;  //width of other rectangle
+    }
+    // test height edge
+    let testY = circleY;
+    if(circleY < top){
+      testY = top;
+    } else if(circleY > bottom){
+      testY = bottom; //height of other rectangle
+    }
+    
+    const distX = circleX - testX;
+    const distY = circleY - testY;
+    const distance = Math.sqrt((distX*distX) + (distY*distY));
+    if(distance <= radiusX || distance <= radiusY){
       return true;
-    } else {
+    }else {
       return false;
     }
+  
   }
 
   getCircle(){
