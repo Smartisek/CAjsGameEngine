@@ -141,13 +141,13 @@ class Player extends GameObject {
       // Move right
       if (horizontalAxis > 0.1) {
         this.isGamepadMovement = true;
-        physics.velocity.x = 100;
+        physics.velocity.x = 400;
         this.direction = -1;
       } 
       // Move left
       else if (horizontalAxis < -0.1) {
         this.isGamepadMovement = true;
-        physics.velocity.x = -100;
+        physics.velocity.x = -400;
         this.direction = 1;
       } 
       // Stop
@@ -175,7 +175,7 @@ class Player extends GameObject {
 
   // function for going up a ladder 
   handleLadder(){
-    this.getComponent(Physics).velocity.y = -365;
+    this.getComponent(Physics).velocity.y = -150;
   }
   
   updateJump(deltaTime) {
