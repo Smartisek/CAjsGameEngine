@@ -65,12 +65,7 @@ class Player extends GameObject {
       this.updateJump(deltaTime);
     }
 
-    if(this.isOnTrampoline){
-      console.log("trampoline");
-      this.trampolineJump();
-      this.emitCollectParticles();
-    }
-
+  
     // Handle collisions with collectibles
     // const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible);
     // for (const collectible of collectibles) {
@@ -82,10 +77,14 @@ class Player extends GameObject {
 
     const trampolines = this.game.gameObjects.filter((obj) => obj instanceof Trampoline);
     for(const trampoline of trampolines){
-      if(physics.isCollidingCircleRect(trampoline.getComponent(Physics))){
+      if(physics.isColliding(trampoline.getComponent(Physics))){
         this.isOnTrampoline = true;
       } else {
         this.isOnTrampoline = false;
+      }
+      if(this.isOnTrampoline){
+        this.trampolineJump();
+        this.emitCollectParticles();
       }
     }
 
@@ -95,7 +94,7 @@ class Player extends GameObject {
     for(const ladder of ladders){
       if(physics.isColliding(ladder.getComponent(Physics))){
         this.isOnLadder = true;
-        if(this.isOnLadder && input.isKeyDown('ArrowUp')){
+        if(this.isOnLadder && input.isKeyDown('KeyW')){
           this.handleLadder();
           console.log("on ladder");
         }

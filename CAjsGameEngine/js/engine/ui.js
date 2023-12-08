@@ -15,6 +15,8 @@ class UI extends Component {
     this.color = color; // The color in which to draw the text.
     this.textAlign = textAlign; // The alignment of the text.
     this.textBaseline = textBaseline; // The baseline of the text.
+    
+    
   }
 
   // The draw method of the UI class.
