@@ -4,6 +4,7 @@ const Images = {
   enemy: new Image(), // The Image instance for the enemy.
   ladder: new Image(),
   platform: new Image(),
+  trampoline: new Image(),
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
@@ -22,6 +23,8 @@ Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image pat
 Images.ladder.src = './resources/images/map/ladder.png';
 
 Images.platform.src = './resources/images/map/platform.png';
+
+Images.trampoline.src = './resources/images/map/trampoline.png';
 
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };

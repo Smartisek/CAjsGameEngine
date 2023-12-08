@@ -5,6 +5,7 @@ import PlayerUI from './playerUI.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import Ladder from './ladder.js';
+import Trampoline from './trampoline.js';
 
 class myLevel extends Game {
 
@@ -26,6 +27,7 @@ class myLevel extends Game {
             new Platform(55, 110, platformWidth),
             new Platform(700, 110, platformWidth),
             new Platform(760, -160, platformWidth),
+            // platform with trampoline 
             new Platform(1600, 200, 250),
         ];
 
@@ -40,6 +42,14 @@ class myLevel extends Game {
 
         for(const ladder of ladders){
             this.addGameObject(ladder);
+        }
+
+        const trampolines = [
+            new Trampoline(1625, 140),
+        ]
+
+        for(const trampoline of trampolines){
+            this.addGameObject(trampoline);
         }
     }
 }
