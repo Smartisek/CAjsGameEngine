@@ -9,6 +9,7 @@ import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
 import Ladder from '../game/ladder.js';
+import Trampoline from './trampoline.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -31,7 +32,9 @@ class Player extends GameObject {
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
-    this.isOnLadder = 0;
+    this.isOnLadder = false;
+    this.isOnTrampoline = false;
+  
   }
 
   // The update function runs every frame and contains game logic
@@ -61,6 +64,11 @@ class Player extends GameObject {
       this.updateJump(deltaTime);
     }
 
+    if(this.isOnTrampoline){
+      console.log("trampoline");
+      this.trampolineJump();
+    }
+
     // Handle collisions with collectibles
     // const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible);
     // for (const collectible of collectibles) {
@@ -69,6 +77,15 @@ class Player extends GameObject {
     //     this.game.removeGameObject(collectible);
     //   }
     // }
+
+    const trampolines = this.game.gameObjects.filter((obj) => obj instanceof Trampoline);
+    for(const trampoline of trampolines){
+      if(physics.isColliding(trampoline.getComponent(Physics))){
+        this.isOnTrampoline = true;
+      } else {
+        this.isOnTrampoline = false;
+      }
+    }
 
     // handle collision with ladders, if we are colliding with it set boolean to true otherwise set it to false so player can go up
     // anywhere else 
@@ -176,6 +193,11 @@ class Player extends GameObject {
   // function for going up a ladder 
   handleLadder(){
     this.getComponent(Physics).velocity.y = -150;
+  }
+
+  trampolineJump(){
+    this.getComponent(Physics).velocity.y = -500;
+    this.isOnTrampoline = false;
   }
   
   updateJump(deltaTime) {
