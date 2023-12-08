@@ -42,21 +42,22 @@ class Player extends GameObject {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
 
-    this.handleGamepadInput(input);
+   
     
     // Handle player movement
-    if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
-      physics.velocity.x = 200;
+    if (input.isKeyDown('ArrowRight')) {
+      physics.velocity.x = 400;
       this.direction = -1;
-    } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
-      physics.velocity.x = -200;
+    } else if (input.isKeyDown('ArrowLeft')) {
+      physics.velocity.x = -400;
       this.direction = 1;
     } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
     }
+    
 
     // Handle player jumping
-    if (!this.isGamepadJump && input.isKeyDown('Space') && this.isOnPlatform) {
+    if (input.isKeyDown('Space') && this.isOnPlatform) {
       this.startJump();
     }
 
@@ -67,6 +68,7 @@ class Player extends GameObject {
     if(this.isOnTrampoline){
       console.log("trampoline");
       this.trampolineJump();
+      this.emitCollectParticles();
     }
 
     // Handle collisions with collectibles
@@ -145,40 +147,6 @@ class Player extends GameObject {
     super.update(deltaTime);
   }
 
-  handleGamepadInput(input){
-    const gamepad = input.getGamepad(); // Get the gamepad input
-    const physics = this.getComponent(Physics); // Get physics component
-    if (gamepad) {
-      // Reset the gamepad flags
-      this.isGamepadMovement = false;
-      this.isGamepadJump = false;
-
-      // Handle movement
-      const horizontalAxis = gamepad.axes[0];
-      // Move right
-      if (horizontalAxis > 0.1) {
-        this.isGamepadMovement = true;
-        physics.velocity.x = 400;
-        this.direction = -1;
-      } 
-      // Move left
-      else if (horizontalAxis < -0.1) {
-        this.isGamepadMovement = true;
-        physics.velocity.x = -400;
-        this.direction = 1;
-      } 
-      // Stop
-      else {
-        physics.velocity.x = 0;
-      }
-      
-      // Handle jump, using gamepad button 0 (typically the 'A' button on most gamepads)
-      if (input.isGamepadButtonDown(0) && this.isOnPlatform) {
-        this.isGamepadJump = true;
-        this.startJump();
-      }
-    }
-  }
 
   startJump() {
     // Initiate a jump if the player is on a platform
@@ -196,7 +164,7 @@ class Player extends GameObject {
   }
 
   trampolineJump(){
-    this.getComponent(Physics).velocity.y = -500;
+    this.getComponent(Physics).velocity.y = -700;
     this.isOnTrampoline = false;
   }
   

@@ -29,6 +29,9 @@ class myLevel extends Game {
             new Platform(760, -160, platformWidth),
             // platform with trampoline 
             new Platform(1600, 200, 250),
+
+            // 3rd floor
+            new Platform(2000, -630, 1.5*platformWidth),
         ];
 
         for (const platform of platforms) {
@@ -45,7 +48,7 @@ class myLevel extends Game {
         }
 
         const trampolines = [
-            new Trampoline(1625, 140),
+            new Trampoline(1625, 120),
         ]
 
         for(const trampoline of trampolines){
