@@ -45,10 +45,10 @@ class Player extends GameObject {
    
     
     // Handle player movement
-    if (input.isKeyDown('ArrowRight')) {
+    if (input.isKeyDown('KeyD')) {
       physics.velocity.x = 400;
       this.direction = -1;
-    } else if (input.isKeyDown('ArrowLeft')) {
+    } else if (input.isKeyDown('KeyA')) {
       physics.velocity.x = -400;
       this.direction = 1;
     } else if (!this.isGamepadMovement) {

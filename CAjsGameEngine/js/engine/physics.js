@@ -45,6 +45,31 @@ class Physics extends Component {
     // Return the bounding box.
     return [left, right, top, bottom];
   }
+
+  isCollidingCircleRect(otherPhysics){
+    // const[left, right, top, bottom] = this.getBoundingBox();
+    const[circleX, circleY, radiusX, radiusY] = this.getCircle();
+    const distX = this.gameObject.x - circleX;
+    const distY = this.gameObject.y - circleY;
+    const distance = Math.sqrt( (distX*distX) + (distY*distY) );
+     
+    if(distance <= radiusX+radiusY){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getCircle(){
+    const rendererCir = this.gameObject.getComponent(Renderer);
+    const circleX = this.gameObject.x;
+    const circleY = this.gameObject.y;
+    const radiusX = this.gameObject.x + rendererCir.width/2;
+    const radiusY = this.gameObject.y + rendererCir.height/2;
+    
+    return [circleX, circleY, radiusX, radiusY];
+
+  }
 }
 
 // The Physics class is then exported as the default export of this module.
