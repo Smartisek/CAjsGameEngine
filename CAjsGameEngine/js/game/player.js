@@ -10,6 +10,7 @@ import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
 import Ladder from '../game/ladder.js';
 import Trampoline from './trampoline.js';
+import Jetpack from './jetpack.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -34,6 +35,7 @@ class Player extends GameObject {
     this.isGamepadJump = false;
     this.isOnLadder = false;
     this.isOnTrampoline = false;
+    this.jetpackOn = false;
   
   }
 
@@ -63,6 +65,10 @@ class Player extends GameObject {
 
     if (this.isJumping) {
       this.updateJump(deltaTime);
+    }
+
+    if(this.jetpackOn && input.isKeyDown("Space")){
+      this.jetpackFly();
     }
 
   
@@ -126,6 +132,14 @@ class Player extends GameObject {
         }    
       }
     }
+
+    const jetpacks = this.game.gameObjects.filter((obj) => obj instanceof Jetpack);
+      for(const jetpack of jetpacks ){
+        if(physics.isColliding(jetpack.getComponent(Physics))){
+          this.jetpackOn = true;
+          this.game.removeGameObject(jetpack);
+        }
+      }
   
     // Check if player has fallen off the bottom of the screen
     if (this.y > this.game.canvas.height) {
@@ -155,6 +169,11 @@ class Player extends GameObject {
       this.getComponent(Physics).velocity.y = -this.jumpForce;
       this.isOnPlatform = false;
     }
+  }
+
+  jetpackFly(){
+    this.getComponent(Physics).velocity.y = -200;
+    this.emitCollectParticles();
   }
 
   // function for going up a ladder 

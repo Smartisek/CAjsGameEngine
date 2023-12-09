@@ -6,8 +6,8 @@ import Platform from './platform.js';
 import Collectible from './collectible.js';
 import Ladder from './ladder.js';
 import Trampoline from './trampoline.js';
-import { Images } from '../engine/resources.js';
-import Renderer from '../engine/renderer.js';
+import Jetpack from './jetpack.js';
+
 
 class myLevel extends Game {
 
@@ -62,6 +62,9 @@ class myLevel extends Game {
         for(const trampoline of trampolines){
             this.addGameObject(trampoline);
         }
+
+        const jetpack = new Jetpack(60, 0);
+        this.addGameObject(jetpack);
     }
 }
 
