@@ -8,7 +8,7 @@ class Bullet extends GameObject{
         super(x, y);
 
         this.addComponent(new Renderer(color, width, heigth));
-        this.addComponent(new Physics({x:80, y:0}, {x:0, y:0}, {x:0, y:0}));
+        this.addComponent(new Physics({x:200, y:0}, {x:0, y:0}, {x:0, y:0}));
         this.damage = damage;
 
         this.tag = "bullet";

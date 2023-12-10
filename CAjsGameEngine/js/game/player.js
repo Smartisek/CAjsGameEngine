@@ -38,6 +38,9 @@ class Player extends GameObject {
     this.isOnLadder = false;
     this.isOnTrampoline = false;
     this.jetpackOn = false;
+// an empty array for bullets
+    this.bullets = [];
+    this.canFire = true;
   
   }
 
@@ -70,8 +73,9 @@ class Player extends GameObject {
       this.jetpackFly();
     }
 
-    if(input.isKeyDown('ShiftLeft')){
+    if(input.isKeyDown('ShiftLeft') && this.canFire){
       this.fireBullet();
+      this.canFire = false;
       console.log("bullet fired");
     }
   
@@ -174,14 +178,24 @@ class Player extends GameObject {
     }
   }
 
-  fireBullet(direction){
-    const bullet = new Bullet(this.x, this.y, 40,40, "blue", this.direction);
-    this.game.addGameObject(bullet);
+  fireBullet(){
+    const bullet = new Bullet(this.x, this.y, 15,15, "blue", this.direction);
     if(this.direction ==1){
-      bullet.getComponent(Physics).velocity.x = -40;
+      this.game.addGameObject(bullet);
+      bullet.getComponent(Physics).velocity.x = -150;
     } else {
-      bullet.getComponent(Physics).velocity.x = 40;
+      this.game.addGameObject(bullet);
+      bullet.getComponent(Physics).velocity.x = 150;
     }
+// add bullets into the array 
+    this.bullets.push(bullet);
+    if(this.canFire){
+      setTimeout(() => {
+        this.canFire = true;
+      }, 1000);
+    }
+    
+
   }
 
   jetpackFly(){
