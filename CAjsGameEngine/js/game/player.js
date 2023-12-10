@@ -11,6 +11,7 @@ import ParticleSystem from '../engine/particleSystem.js';
 import Ladder from '../game/ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
+import Bullet from './bullet.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -44,8 +45,6 @@ class Player extends GameObject {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
 
-   
-    
     // Handle player movement
     if (input.isKeyDown('KeyD')) {
       physics.velocity.x = 400;
@@ -57,7 +56,6 @@ class Player extends GameObject {
       physics.velocity.x = 0;
     }
     
-
     // Handle player jumping
     if (input.isKeyDown('Space') && this.isOnPlatform) {
       this.startJump();
@@ -69,6 +67,11 @@ class Player extends GameObject {
 
     if(this.jetpackOn && input.isKeyDown("Space")){
       this.jetpackFly();
+    }
+
+    if(input.isKeyDown('ShiftLeft')){
+      console.log();
+      this.addGameObject(new Bullet(this.x + 10, this.y, 20, 20, "blue"));
     }
 
   

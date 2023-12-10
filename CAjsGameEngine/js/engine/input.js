@@ -2,7 +2,7 @@
 import Component from './component.js';
 
 // The Input class is responsible for handling keyboard and gamepad input.
-class Input extends Component {
+class Input extends Component{
   // The constructor initializes a new instance of the Input class.
   constructor() {
     // Call the constructor of the parent class (Component).
