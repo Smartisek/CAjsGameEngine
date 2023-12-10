@@ -75,9 +75,10 @@ class Player extends GameObject {
 
     if(input.isKeyDown('ShiftLeft') && this.canFire){
       this.fireBullet();
-      this.canFire = false;
-      console.log("bullet fired");
+      
     }
+
+    this.checkBulletRange();
   
     // Handle collisions with collectibles
     // const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible);
@@ -180,23 +181,42 @@ class Player extends GameObject {
 
   fireBullet(){
     const bullet = new Bullet(this.x, this.y, 15,15, "blue", this.direction);
-    if(this.direction ==1){
-      this.game.addGameObject(bullet);
-      bullet.getComponent(Physics).velocity.x = -150;
-    } else {
-      this.game.addGameObject(bullet);
-      bullet.getComponent(Physics).velocity.x = 150;
-    }
-// add bullets into the array 
     this.bullets.push(bullet);
+    for(const bullet of this.bullets){
+      this.game.addGameObject(bullet);
+      if(bullet.direction ==1){
+        bullet.getComponent(Physics).velocity.x = -150;
+      } else {
+        bullet.getComponent(Physics).velocity.x = 150;
+      }
+    }
     if(this.canFire){
       setTimeout(() => {
-        this.canFire = true;
+      this.canFire = true;
       }, 1000);
     }
-    
+    this.canFire = false;
 
+    // for(let i = this.bullets.length - 1; i >= 0; i--){
+    //   const bullet = this.bullets[i];
+    //   if(bullet.x < 0 || bullet.x > this.game.canvas.width){
+    //     this.bullets.splice(i,1);
+    //     // this.game.removeGameObject(bullet);
+    //     console.log("removed");
+    //   }
+    // }
   }
+
+checkBulletRange(){
+  for(let i = this.bullets.length - 1; i >= 0; i--){
+    const bullet = this.bullets[i];
+    if(bullet.x < 0 || bullet.x > this.game.canvas.width){
+      this.bullets.splice(i,1);
+      // this.game.removeGameObject(bullet);
+      console.log("removed");
+    }
+  }
+}
 
   jetpackFly(){
     this.getComponent(Physics).velocity.y = -200;
