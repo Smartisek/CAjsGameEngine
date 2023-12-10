@@ -4,11 +4,12 @@ import Physics from '../engine/physics.js';
 
 
 class Bullet extends GameObject{
-    constructor(x, y, width, heigth, color){
+    constructor(x, y, width, heigth, color, damage){
         super(x, y);
 
         this.addComponent(new Renderer(color, width, heigth));
-        this.addComponent(new Physics({x:30, y:0}, {x:0, y:0}, {x:0, y:0}));
+        this.addComponent(new Physics({x:80, y:0}, {x:0, y:0}, {x:0, y:0}));
+        this.damage = damage;
 
         this.tag = "bullet";
         }

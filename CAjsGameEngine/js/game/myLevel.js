@@ -7,8 +7,7 @@ import Collectible from './collectible.js';
 import Ladder from './ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
-import Input from '../engine/input.js';
-
+import Bullet from './bullet.js';
 
 class myLevel extends Game {
 
@@ -17,6 +16,7 @@ class myLevel extends Game {
 
         const player = new Player(0, this.canvas.height);
         this.addGameObject(player);
+
 
         this.camera.target = player;
 
@@ -40,8 +40,6 @@ class myLevel extends Game {
         this.addGameObject(new PlayerUI(10, 10));
 
         this.addGameObject(new Enemy(40, this.canvas.height/2));
-
-
 
         for (const platform of platforms) {
             this.addGameObject(platform);
@@ -69,6 +67,7 @@ class myLevel extends Game {
         this.addGameObject(jetpack);
     }
 
+       
 }
 
 export default myLevel;

@@ -12,6 +12,7 @@ import Ladder from '../game/ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
+import myLevel from './myLevel.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -70,10 +71,9 @@ class Player extends GameObject {
     }
 
     if(input.isKeyDown('ShiftLeft')){
-      console.log();
-      this.addGameObject(new Bullet(this.x + 10, this.y, 20, 20, "blue"));
+      this.fireBullet();
+      console.log("bullet fired");
     }
-
   
     // Handle collisions with collectibles
     // const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible);
@@ -171,6 +171,16 @@ class Player extends GameObject {
       this.jumpTimer = this.jumpTime;
       this.getComponent(Physics).velocity.y = -this.jumpForce;
       this.isOnPlatform = false;
+    }
+  }
+
+  fireBullet(direction){
+    const bullet = new Bullet(this.x, this.y, 40,40, "blue", this.direction);
+    this.game.addGameObject(bullet);
+    if(this.direction ==1){
+      bullet.getComponent(Physics).velocity.x = -40;
+    } else {
+      bullet.getComponent(Physics).velocity.x = 40;
     }
   }
 
