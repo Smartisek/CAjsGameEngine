@@ -13,6 +13,7 @@ import {Images} from '../engine/resources.js';
 // Import the Player and Platform classes from the current directory
 import Player from './player.js';
 import Platform from './platform.js';
+import Bullet from './bullet.js';
 
 // Define a new class, Enemy, which extends (i.e., inherits from) GameObject
 class Enemy extends GameObject {
@@ -85,6 +86,18 @@ class Enemy extends GameObject {
         this.isOnPlatform = true;
       }
     }
+
+    // Collision with bullets and enemy, we filter all of the bullets in game objects and check if they are colliding with the enemy
+    const bullets = this.game.gameObjects.filter(obj => obj instanceof Bullet);
+    for(const bullet of bullets){
+      if(physics.isColliding(bullet.getComponent(Physics))){
+        this.game.removeGameObject(this);   //if they collide, remove enemy and bullet too
+        this.game.removeGameObject(bullet);
+        player.bullets.splice(player.bullets.indexOf(bullet), 1); //we also need to remove from bullet array becuase if we were to fire again, the bullet that 
+        //hit an enemy would still be in the array and would be rendered
+      }
+    }
+
 
     // Call the update method of the superclass (GameObject), passing along deltaTime
     super.update(deltaTime);

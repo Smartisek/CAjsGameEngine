@@ -73,7 +73,7 @@ class Player extends GameObject {
       this.jetpackFly();
     }
 
-    if(input.isKeyDown('ShiftLeft') && this.canFire){
+    if(input.isKeyDown('ControlLeft') && this.canFire){
       this.fireBullet();
       
     }
@@ -193,18 +193,9 @@ class Player extends GameObject {
     if(this.canFire){
       setTimeout(() => {
       this.canFire = true;
-      }, 1000);
+      }, 500);
     }
     this.canFire = false;
-
-    // for(let i = this.bullets.length - 1; i >= 0; i--){
-    //   const bullet = this.bullets[i];
-    //   if(bullet.x < 0 || bullet.x > this.game.canvas.width){
-    //     this.bullets.splice(i,1);
-    //     // this.game.removeGameObject(bullet);
-    //     console.log("removed");
-    //   }
-    // }
   }
 
 checkBulletRange(){
