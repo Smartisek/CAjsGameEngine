@@ -14,6 +14,7 @@ import {Images} from '../engine/resources.js';
 import Player from './player.js';
 import Platform from './platform.js';
 import Bullet from './bullet.js';
+import ParticleSystem from '../engine/particleSystem.js';
 
 // Define a new class, Enemy, which extends (i.e., inherits from) GameObject
 class Enemy extends GameObject {
@@ -95,12 +96,19 @@ class Enemy extends GameObject {
         this.game.removeGameObject(bullet);
         player.bullets.splice(player.bullets.indexOf(bullet), 1); //we also need to remove from bullet array becuase if we were to fire again, the bullet that 
         //hit an enemy would still be in the array and would be rendered
+        this.emitHurtParticles();
       }
     }
 
 
     // Call the update method of the superclass (GameObject), passing along deltaTime
     super.update(deltaTime);
+  }
+
+  emitHurtParticles() {
+    //create particles when enemy is destroyed
+    const particleSystem = new ParticleSystem(this.x, this.y, 'red', 20, 2, 1);
+    this.game.addGameObject(particleSystem);
   }
 }
 

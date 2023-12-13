@@ -180,14 +180,14 @@ class Player extends GameObject {
   }
 
   fireBullet(){
-    const bullet = new Bullet(this.x, this.y, 15,15, "blue", this.direction);
+    const bullet = new Bullet(this.x, this.y+15, 5,5, "blue", this.direction);
     this.bullets.push(bullet);
     for(const bullet of this.bullets){
       this.game.addGameObject(bullet);
       if(bullet.direction ==1){
-        bullet.getComponent(Physics).velocity.x = -150;
+        bullet.getComponent(Physics).velocity.x = -450;
       } else {
-        bullet.getComponent(Physics).velocity.x = 150;
+        bullet.getComponent(Physics).velocity.x = 450;
       }
     }
     if(this.canFire){
