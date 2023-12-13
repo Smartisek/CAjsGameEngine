@@ -79,8 +79,8 @@ class Physics extends Component {
   //   const rendererCir = this.gameObject.getComponent(Renderer);
   //   const circleX = this.gameObject.x;
   //   const circleY = this.gameObject.y;
-  //   const radiusX = this.gameObject.x + rendererCir.width/2;
-  //   const radiusY = this.gameObject.y + rendererCir.height/2;
+  //   const radiusX = rendererCir.width/2;
+  //   const radiusY = rendererCir.height/2;
     
   //   return [circleX, circleY, radiusX, radiusY];
 

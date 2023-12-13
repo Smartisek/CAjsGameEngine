@@ -29,7 +29,7 @@ class Player extends GameObject {
     this.score = 0;
     this.isOnPlatform = false;
     this.isJumping = false;
-    this.jumpForce = 200;
+    this.jumpForce = 250;
     this.jumpTime = 0.3;
     this.jumpTimer = 0;
     this.isInvulnerable = false;
@@ -211,7 +211,7 @@ checkBulletRange(){
 
   jetpackFly(){
     this.getComponent(Physics).velocity.y = -200;
-    this.emitCollectParticles();
+    this.emitJetpackParticels();
   }
 
   // function for going up a ladder 
@@ -254,6 +254,11 @@ checkBulletRange(){
   emitCollectParticles() {
     // Create a particle system at the player's position when a collectible is collected
     const particleSystem = new ParticleSystem(this.x, this.y, 'yellow', 20, 1, 0.5);
+    this.game.addGameObject(particleSystem);
+  }
+
+  emitJetpackParticels(){
+    const particleSystem = new ParticleSystem(this.x, this.y+20, 'orange', 20, 2, 1);
     this.game.addGameObject(particleSystem);
   }
 

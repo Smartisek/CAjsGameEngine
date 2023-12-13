@@ -37,6 +37,7 @@ class Enemy extends GameObject {
     this.movementDistance = 0;
     this.movementLimit = 100;
     this.movingRight = true;
+    this.enemyHealth = 3;
   }
 
   // Define an update method that will run every frame of the game. It takes deltaTime as an argument
@@ -100,11 +101,10 @@ class Enemy extends GameObject {
         this.emitHurtParticles();
         const collectible = new Collectible(this.x, this.y+10, 10,10, 'gold');
         this.game.addGameObject(collectible);
+        }
+      
       
       }
-    }
-
-
     // Call the update method of the superclass (GameObject), passing along deltaTime
     super.update(deltaTime);
   }
