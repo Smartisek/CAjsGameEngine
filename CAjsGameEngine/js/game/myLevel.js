@@ -39,7 +39,7 @@ class myLevel extends Game {
         ];
         this.addGameObject(new PlayerUI(10, 10));
 
-        this.addGameObject(new Enemy(40, this.canvas.height/2));
+        this.addGameObject(new Enemy(40, this.canvas.height/2.5));
 
         for (const platform of platforms) {
             this.addGameObject(platform);

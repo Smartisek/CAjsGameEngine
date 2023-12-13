@@ -15,6 +15,7 @@ import Player from './player.js';
 import Platform from './platform.js';
 import Bullet from './bullet.js';
 import ParticleSystem from '../engine/particleSystem.js';
+import Collectible from './collectible.js';
 
 // Define a new class, Enemy, which extends (i.e., inherits from) GameObject
 class Enemy extends GameObject {
@@ -97,6 +98,9 @@ class Enemy extends GameObject {
         player.bullets.splice(player.bullets.indexOf(bullet), 1); //we also need to remove from bullet array becuase if we were to fire again, the bullet that 
         //hit an enemy would still be in the array and would be rendered
         this.emitHurtParticles();
+        const collectible = new Collectible(this.x, this.y+10, 10,10, 'gold');
+        this.game.addGameObject(collectible);
+      
       }
     }
 

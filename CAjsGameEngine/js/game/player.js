@@ -81,13 +81,13 @@ class Player extends GameObject {
     this.checkBulletRange();
   
     // Handle collisions with collectibles
-    // const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible);
-    // for (const collectible of collectibles) {
-    //   if (physics.isColliding(collectible.getComponent(Physics))) {
-    //     this.collect(collectible);
-    //     this.game.removeGameObject(collectible);
-    //   }
-    // }
+    const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible);
+    for (const collectible of collectibles) {
+      if (physics.isColliding(collectible.getComponent(Physics))) {
+        this.collect(collectible);
+        this.game.removeGameObject(collectible);
+      }
+    }
 
     const trampolines = this.game.gameObjects.filter((obj) => obj instanceof Trampoline);
     for(const trampoline of trampolines){
