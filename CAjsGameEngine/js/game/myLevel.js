@@ -8,12 +8,13 @@ import Ladder from './ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
+import SceneManager from '../sceneManager.js';
 
 class myLevel extends Game {
 
     constructor(canvasId) {
         super(canvasId);
-
+      
         const player = new Player(0, this.canvas.height);
         this.addGameObject(player);
 

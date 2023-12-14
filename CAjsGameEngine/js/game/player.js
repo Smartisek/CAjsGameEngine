@@ -12,13 +12,14 @@ import Ladder from '../game/ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
-import myLevel from './myLevel.js';
+import SceneManager from '../sceneManager.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
-  constructor(x, y) {
+  constructor(x, y, sceneManager) {
     super(x, y); // Call parent's constructor
+    this.sceneManager = sceneManager;
     this.renderer = new Renderer('blue', 50, 50, Images.player); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
@@ -48,6 +49,7 @@ class Player extends GameObject {
   update(deltaTime) {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
+    const sceneManager = this.getComponent(SceneManager); //get scene manager to switch scenes
 
     // Handle player movement
     if (input.isKeyDown('KeyD')) {
@@ -67,6 +69,11 @@ class Player extends GameObject {
 
     if (this.isJumping) {
       this.updateJump(deltaTime);
+    }
+
+    if(input.isKeyDown('KeyM')){
+      this.sceneManager.switchScene('menu');
+      console.log("menu");
     }
 
     //when boolean jetpackon is true and we press jump space, we can now fly since we picked up a jetpack
