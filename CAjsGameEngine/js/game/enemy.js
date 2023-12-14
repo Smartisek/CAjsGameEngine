@@ -71,7 +71,7 @@ class Enemy extends GameObject {
       }
     }
 
-    // Check if the enemy is colliding with the player
+    // Check if the enemy is colliding with the player, same as in the player script 
     const player = this.game.gameObjects.find(obj => obj instanceof Player);
     if (physics.isColliding(player.getComponent(Physics))) {
       player.collidedWithEnemy();

@@ -69,15 +69,18 @@ class Player extends GameObject {
       this.updateJump(deltaTime);
     }
 
+    //when boolean jetpackon is true and we press jump space, we can now fly since we picked up a jetpack
     if(this.jetpackOn && input.isKeyDown("Space")){
       this.jetpackFly();
     }
 
+    //when control pressed and canfire is true, fire bullets 
     if(input.isKeyDown('ControlLeft') && this.canFire){
       this.fireBullet();
       
     }
 
+    //when firing bullets, we need to check if they are out of canvas and remove them for performance reasons 
     this.checkBulletRange();
   
     // Handle collisions with collectibles
@@ -120,7 +123,8 @@ class Player extends GameObject {
       
     }
 
-    // Handle collisions with enemies
+    // Handle collisions with enemies, filter all instences of Enemy class in the scene and for each, if they are colliding
+    // call the function collidewithenemy below  
     const enemies = this.game.gameObjects.filter((obj) => obj instanceof Enemy);
     for (const enemy of enemies) {
       if (physics.isColliding(enemy.getComponent(Physics))) {
@@ -134,20 +138,21 @@ class Player extends GameObject {
     const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
     for (const platform of platforms) {
       if (physics.isColliding(platform.getComponent(Physics))) {
-        if (!this.isJumping) {
+        if (!this.isJumping) { //if player is not currently jumping, set velocity ti 0 and acceleration in y dirrection to 0
           physics.velocity.y = 0;
           physics.acceleration.y = 0;
           this.y = platform.y - this.renderer.height;
-          this.isOnPlatform = true;
+          this.isOnPlatform = true; //set boolean to true so we can jump again
         }    
       }
     }
 
+    //Check for all the instances of jetpack class in scene and for each found check if they are colliding with player
     const jetpacks = this.game.gameObjects.filter((obj) => obj instanceof Jetpack);
       for(const jetpack of jetpacks ){
         if(physics.isColliding(jetpack.getComponent(Physics))){
-          this.jetpackOn = true;
-          this.game.removeGameObject(jetpack);
+          this.jetpackOn = true; //if we collide set boolean to true 
+          this.game.removeGameObject(jetpack); //remove object when we picked it up
         }
       }
   
@@ -176,23 +181,24 @@ class Player extends GameObject {
     if (this.isOnPlatform) { 
       this.isJumping = true;
       this.jumpTimer = this.jumpTime;
-      this.getComponent(Physics).velocity.y = -this.jumpForce;
-      this.isOnPlatform = false;
+      this.getComponent(Physics).velocity.y = -this.jumpForce; //when we jump, set velocity in - direction with jumpforce value
+      this.isOnPlatform = false; // when we jump we are not on platform so set boolean to false 
     }
   }
 
+  //when function called, create a new bullet instance and push it into an array of bullets 
   fireBullet(){
-    const bullet = new Bullet(this.x, this.y+15, 5,5, "blue", this.direction);
+    const bullet = new Bullet(this.x, this.y+15, 5,5, "blue", this.direction); //this.direction is to determine which way to go(it is the direction of player)
     this.bullets.push(bullet);
-    for(const bullet of this.bullets){
+    for(const bullet of this.bullets){ //go through all the bullets added into an array and add them into the game 
       this.game.addGameObject(bullet);
-      if(bullet.direction ==1){
+      if(bullet.direction ==1){ //set which way they go based on players direction 
         bullet.getComponent(Physics).velocity.x = -450;
       } else {
         bullet.getComponent(Physics).velocity.x = 450;
       }
     }
-    if(this.canFire){
+    if(this.canFire){ //set a timeout for firing for performance reasons after 500ms
       setTimeout(() => {
       this.canFire = true;
       }, 500);
@@ -201,26 +207,28 @@ class Player extends GameObject {
   }
 
 checkBulletRange(){
-  for(let i = this.bullets.length - 1; i >= 0; i--){
+  //using for loop to go through my bullet array (backwards because we are removing from the array) 
+  //then check if the bullet is out of canvas, if yes remove it from the array and also from the game 
+  for(let i = this.bullets.length - 1; i >= 0; i--){ 
     const bullet = this.bullets[i];
     if(bullet.x < 0 || bullet.x > this.game.canvas.width){
       this.bullets.splice(i,1);
-      // this.game.removeGameObject(bullet);
-      console.log("removed");
     }
   }
 }
 
+// when flying with jetpack emit particles for jetpack and set velocity y to -200 to go up 
   jetpackFly(){
     this.getComponent(Physics).velocity.y = -200;
     this.emitJetpackParticels();
   }
 
-  // function for going up a ladder 
+  // function for going up a ladder. set velocity y to -150 to go up
   handleLadder(){
     this.getComponent(Physics).velocity.y = -150;
   }
 
+  //when collided with trampoline, set velocity y to -700 to bounce up 
   trampolineJump(){
     this.getComponent(Physics).velocity.y = -700;
     this.isOnTrampoline = false;
@@ -229,7 +237,7 @@ checkBulletRange(){
   updateJump(deltaTime) {
     // Updates the jump progress over time
     this.jumpTimer -= deltaTime;
-    if (this.jumpTimer <= 0 || this.getComponent(Physics).velocity.y > 0) {
+    if (this.jumpTimer <= 0 || this.getComponent(Physics).velocity.y > 0) { //when in the air too long or velocity in y direction is positive, set jump to false
       this.isJumping = false;
     }
   }
@@ -248,7 +256,7 @@ checkBulletRange(){
 
   collect(collectible) {
     // Handle collectible pickup
-    this.score += collectible.value;
+    this.score += collectible.value; //updating score variable with picked up value of collectible 
     console.log(`Score: ${this.score}`);
     this.emitCollectParticles(collectible);
   }

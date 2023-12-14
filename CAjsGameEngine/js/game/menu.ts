@@ -1,4 +1,4 @@
-import Game from "../engine/game.js";
 
+enum GameState { START, GAME, GAMEOVER, GAMEWIN }
 
 //enums for game states
