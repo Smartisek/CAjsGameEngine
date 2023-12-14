@@ -46,45 +46,45 @@ class Physics extends Component {
     return [left, right, top, bottom];
   }
 
-  // isCollidingCircleRect(otherPhysics){
-  //   const[left, right, top, bottom] = otherPhysics.getBoundingBox();
-  //   const [circleX, circleY, radiusX, radiusY] = this.getCircle();
-  //   let testX = circleX;
-  //   // test width edge
-  //   if(circleX < left){
-  //     testX = left;
-  //   } else if(circleX > right){
-  //     testX = right;  //width of other rectangle
-  //   }
-  //   // test height edge
-  //   let testY = circleY;
-  //   if(circleY < top){
-  //     testY = top;
-  //   } else if(circleY > bottom){
-  //     testY = bottom; //height of other rectangle
-  //   }
+  isCollidingCircleRect(otherPhysics){
+    const[left, right, top, bottom] = otherPhysics.getBoundingBox();
+    const [circleX, circleY, radiusX, radiusY] = this.getCircle();
+    let testX = circleX;
+    // test width edge
+    if(circleX < left){
+      testX = left;
+    } else if(circleX > right){
+      testX = right;  //width of other rectangle
+    }
+    // test height edge
+    let testY = circleY;
+    if(circleY < top){
+      testY = top;
+    } else if(circleY > bottom){
+      testY = bottom; //height of other rectangle
+    }
     
-  //   const distX = circleX - testX;
-  //   const distY = circleY - testY;
-  //   const distance = Math.sqrt((distX*distX) + (distY*distY));
-  //   if(distance <= radiusX || distance <= radiusY){
-  //     return true;
-  //   }else {
-  //     return false;
-  //   }
+    const distX = circleX - testX;
+    const distY = circleY - testY;
+    const distance = Math.sqrt((distX*distX) + (distY*distY));
+    if(distance <= radiusX || distance <= radiusY){
+      return true;
+    }else {
+      return false;
+    }
   
-  // }
+  }
 
-  // getCircle(){
-  //   const rendererCir = this.gameObject.getComponent(Renderer);
-  //   const circleX = this.gameObject.x;
-  //   const circleY = this.gameObject.y;
-  //   const radiusX = rendererCir.width/2;
-  //   const radiusY = rendererCir.height/2;
+  getCircle(){
+    const rendererCir = this.gameObject.getComponent(Renderer);
+    const circleX = this.gameObject.x;
+    const circleY = this.gameObject.y;
+    const radiusX = rendererCir.width/2;
+    const radiusY = rendererCir.height/2;
     
-  //   return [circleX, circleY, radiusX, radiusY];
+    return [circleX, circleY, radiusX, radiusY];
 
-  // }
+  }
 }
 
 // The Physics class is then exported as the default export of this module.

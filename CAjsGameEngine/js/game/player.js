@@ -89,9 +89,11 @@ class Player extends GameObject {
       }
     }
 
+    // using collision rect to circle, player has rect bouding box drawn and trampoline has circle bounding box drawn
+    //then check if they are colliding
     const trampolines = this.game.gameObjects.filter((obj) => obj instanceof Trampoline);
     for(const trampoline of trampolines){
-      if(physics.isColliding(trampoline.getComponent(Physics))){
+      if(physics.isCollidingCircleRect(trampoline.getComponent(Physics))){
         this.isOnTrampoline = true;
       } else {
         this.isOnTrampoline = false;
