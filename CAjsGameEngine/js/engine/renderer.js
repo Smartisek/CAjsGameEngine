@@ -39,7 +39,9 @@ class Renderer extends Component {
     } else {
       // If no image is provided or it has not finished loading, draw a rectangle with the specified color.
       ctx.fillStyle = this.color;
-      ctx.fillRect(this.gameObject.x, this.gameObject.y, this.width, this.height);
+      ctx.beginPath();
+      ctx.arc(this.gameObject.x, this.gameObject.y, this.width, 0, 2 * Math.PI);
+      ctx.fill();
     }
   }
 }
