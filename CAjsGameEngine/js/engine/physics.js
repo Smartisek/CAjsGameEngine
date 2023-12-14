@@ -46,43 +46,49 @@ class Physics extends Component {
     return [left, right, top, bottom];
   }
 
+  // using my code p5.js from first year: https://studentdkit-my.sharepoint.com/:f:/g/personal/d00260467_student_dkit_ie/EhgLj71i7UBPsDS-By0lZPEBApIr2RzHLjeLu5MLaNdFJw?e=PpGXam
   isCollidingCircleRect(otherPhysics){
-    const[left, right, top, bottom] = otherPhysics.getBoundingBox();
-    const [circleX, circleY, radiusX, radiusY] = this.getCircle();
+    const[left, right, top, bottom] = otherPhysics.getBoundingBox(); //get bounding boxes of other rectangle
+    const [circleX, circleY, radiusX, radiusY] = this.getCircle(); // get bounding boxes of circle from function below 
     let testX = circleX;
     // test width edge
-    if(circleX < left){
-      testX = left;
+    if(circleX < left){ //comparing circle x to left edge of other rectangle
+      testX = left; 
     } else if(circleX > right){
       testX = right;  //width of other rectangle
     }
     // test height edge
     let testY = circleY;
-    if(circleY < top){
+    if(circleY < top){ //compering circle y to top edge of rectangle 
       testY = top;
     } else if(circleY > bottom){
       testY = bottom; //height of other rectangle
     }
     
-    const distX = circleX - testX;
-    const distY = circleY - testY;
-    const distance = Math.sqrt((distX*distX) + (distY*distY));
-    if(distance <= radiusX || distance <= radiusY){
+    const distX = circleX - testX; //getting distance between circle and rectangle in x axes 
+    const distY = circleY - testY;  //getting distance between circle and rectangle in y axes
+    const distance = Math.sqrt((distX*distX) + (distY*distY)); // this is a known formula for getting distance between two points 
+    if(distance <= radiusX || distance <= radiusY){ //if our distance between two points if less of equal to radius x or radius y, then it is true
+      //they collide
       return true;
     }else {
-      return false;
+      return false; //otherwise they dont collide
     }
   
   }
 
+  //My code wasnt working right and was colliding with wrong values maybe 10x earlier, that was due 
+  //to in radius i was adding renderCir.widht/2 + this.gameobject.x and same for height so my code wasnt working right 
+  //I decided to ask copilot where the mistake is because the code was right from my own code from first year 
+  //copilot showed me that the mistake was in radius and now the code works properly 
   getCircle(){
-    const rendererCir = this.gameObject.getComponent(Renderer);
-    const circleX = this.gameObject.x;
-    const circleY = this.gameObject.y;
-    const radiusX = rendererCir.width/2;
-    const radiusY = rendererCir.height/2;
+    const rendererCir = this.gameObject.getComponent(Renderer); //create circle from renderer component
+    const circleX = this.gameObject.x;  //get x point of circle which is this gameobject x 
+    const circleY = this.gameObject.y;  //get y point of circle which is this gameobject y
+    const radiusX = rendererCir.width/2;  //get radius x which is half a width of that circle(rebdererCir)
+    const radiusY = rendererCir.height/2; //get radius y which is half a height of that circle(rebdererCir)
     
-    return [circleX, circleY, radiusX, radiusY];
+    return [circleX, circleY, radiusX, radiusY]; //get the bounding boxes of our circle 
 
   }
 }
