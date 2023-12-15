@@ -27,7 +27,7 @@ class Enemy extends GameObject {
     
     // Add a Renderer component to this enemy, responsible for rendering it in the game.
     // The renderer uses the color 'green', dimensions 50x50, and an enemy image from the Images object
-    this.addComponent(new Renderer('green', 50, 50, Images.enemy));
+    this.addComponent(new Renderer('green', 35, 35, Images.enemy));
     
     // Add a Physics component to this enemy, responsible for managing its physical interactions
     // Sets the initial velocity and acceleration
@@ -93,15 +93,18 @@ class Enemy extends GameObject {
     // Collision with bullets and enemy, we filter all of the bullets in game objects and check if they are colliding with the enemy
     const bullets = this.game.gameObjects.filter(obj => obj instanceof Bullet);
     for(const bullet of bullets){
-      if(physics.isCollidingCircleRect(bullet.getComponent(Physics))){
-        this.game.removeGameObject(this);   //if they collide, remove enemy and bullet too
+      if(physics.isCollidingCircleRect(bullet.getComponent(Physics))){  //if they collide, remove enemy and bullet too
+        this.enemyHealth--;
         this.game.removeGameObject(bullet);
         player.bullets.splice(player.bullets.indexOf(bullet), 1); //we also need to remove from bullet array becuase if we were to fire again, the bullet that 
         //hit an enemy would still be in the array and would be rendered
         this.emitHurtParticles();
-        const collectible = new Collectible(this.x, this.y+10, 10,10, 'gold');
-        this.game.addGameObject(collectible);
+        if(this.enemyHealth <= 0){
+          this.game.removeGameObject(this);
+          const collectible = new Collectible(this.x, this.y+10, 10,10, 'gold');
+          this.game.addGameObject(collectible);
         }
+      }
       
       
       }

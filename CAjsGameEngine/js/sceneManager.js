@@ -25,7 +25,7 @@ class SceneManager{
 
 
 const sceneManager = new SceneManager('gameCanvas');
-sceneManager.switchScene('menu');
+sceneManager.switchScene('level');
 
 export default SceneManager;
 

@@ -8,7 +8,7 @@ class Trampoline extends GameObject{
     constructor(x, y){
         super(x,y);
 
-        this.addComponent(new Renderer("red", 200, 105, Images.trampoline));
+        this.addComponent(new Renderer("red", 80, 50, Images.trampoline));
         this.addComponent(new Physics({x:0, y:0}, {x:0, y:0}, {x:0, y:0}));
 
         this.tag = "trampoline";

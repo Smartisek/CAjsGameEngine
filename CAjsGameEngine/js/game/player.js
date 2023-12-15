@@ -20,7 +20,7 @@ class Player extends GameObject {
   constructor(x, y, sceneManager) {
     super(x, y); // Call parent's constructor
     this.sceneManager = sceneManager;
-    this.renderer = new Renderer('blue', 50, 50, Images.player); // Add renderer
+    this.renderer = new Renderer('blue', 35, 35, Images.player); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
@@ -31,13 +31,14 @@ class Player extends GameObject {
     this.isOnPlatform = false;
     this.isJumping = false;
     this.jumpForce = 250;
-    this.jumpTime = 0.3;
+    this.jumpTime = 0.05;
     this.jumpTimer = 0;
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
     this.isOnLadder = false;
     this.isOnTrampoline = false;
+    this.trampolinePower = 300;
     this.jetpackOn = false;
 // an empty array for bullets
     this.bullets = [];
@@ -53,10 +54,10 @@ class Player extends GameObject {
 
     // Handle player movement
     if (input.isKeyDown('KeyD')) {
-      physics.velocity.x = 400;
+      physics.velocity.x = 250;
       this.direction = -1;
     } else if (input.isKeyDown('KeyA')) {
-      physics.velocity.x = -400;
+      physics.velocity.x = -250;
       this.direction = 1;
     } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
@@ -200,15 +201,15 @@ class Player extends GameObject {
     for(const bullet of this.bullets){ //go through all the bullets added into an array and add them into the game 
       this.game.addGameObject(bullet);
       if(bullet.direction ==1){ //set which way they go based on players direction 
-        bullet.getComponent(Physics).velocity.x = -450;
+        bullet.getComponent(Physics).velocity.x = -800;
       } else {
-        bullet.getComponent(Physics).velocity.x = 450;
+        bullet.getComponent(Physics).velocity.x = 800;
       }
     }
     if(this.canFire){ //set a timeout for firing for performance reasons after 500ms
       setTimeout(() => {
       this.canFire = true;
-      }, 500);
+      }, 200);
     }
     this.canFire = false;
   }
@@ -237,7 +238,7 @@ checkBulletRange(){
 
   //when collided with trampoline, set velocity y to -700 to bounce up 
   trampolineJump(){
-    this.getComponent(Physics).velocity.y = -700;
+    this.getComponent(Physics).velocity.y = -this.trampolinePower;
     this.isOnTrampoline = false;
   }
   

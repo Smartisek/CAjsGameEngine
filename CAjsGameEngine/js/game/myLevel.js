@@ -24,31 +24,43 @@ class myLevel extends Game {
         const platformWidth = 500;
         const platforms = [
             // First floor 
-            new Platform(-20, this.canvas.height/2, platformWidth*2),
+            new Platform(-20, this.canvas.height/2, platformWidth),
+            new Platform(650, this.canvas.height/2, platformWidth),
+
+
             
             // Second floor 
-            new Platform(55, 110, platformWidth),
-            new Platform(700, 110, platformWidth),
-            new Platform(760, -160, platformWidth),
-            // platform with trampoline 
-            new Platform(1600, 200, 280),
-
+            new Platform(55, 180, platformWidth),
+            new Platform(700, 180, platformWidth),
+            new Platform(760, -100, platformWidth),
+            new Platform(0, -100, platformWidth/2),
             // 3rd floor
-            new Platform(2000, -610, platformWidth/2),
-            // 4th floor
-            new Platform(760, -1300, 2*platformWidth),
+            new Platform(1600, -610, platformWidth/2),
         ];
+            for (const platform of platforms) {
+                this.addGameObject(platform);
+            }
+
+
         this.addGameObject(new PlayerUI(10, 10));
 
-        this.addGameObject(new Enemy(40, this.canvas.height/2.5));
+        const enemies = [
+            new Enemy(1050, this.canvas.height/2.3),
+            new Enemy(40, this.canvas.height/2.3),
+            new Enemy(750, 130),
+            new Enemy(900, 130),
+            new Enemy(800, -60),
+            new Enemy(-10, -60),
+        ]
 
-        for (const platform of platforms) {
-            this.addGameObject(platform);
+        for(const enemy of enemies){
+            this.addGameObject(enemy);
         }
 
+        
         const ladders = [
-            new Ladder(710, -150),
-            new Ladder(10, 110),
+            new Ladder(710, -100),
+            new Ladder(10, 180),
         ]
 
         for(const ladder of ladders){
@@ -56,8 +68,7 @@ class myLevel extends Game {
         }
 
         const trampolines = [
-            new Trampoline(1625, 120),
-            new Trampoline(2020, -680),
+            new Trampoline(450, -100),
         ]
 
         for(const trampoline of trampolines){
