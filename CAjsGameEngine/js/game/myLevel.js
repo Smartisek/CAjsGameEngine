@@ -8,7 +8,7 @@ import Ladder from './ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
-import SceneManager from '../sceneManager.js';
+import SceneManager from '../engine/sceneManager.js';
 import Asteroid from './asteroid.js';
 
 class myLevel extends Game {

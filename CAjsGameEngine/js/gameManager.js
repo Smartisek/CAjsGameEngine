@@ -1,5 +1,5 @@
 import Game from "./engine/game.js";
-import SceneManager from "./sceneManager.js";
+import SceneManager from "./engine/sceneManager.js";
 import Player from "./game/player.js";
 
 const game = new Game('gameCanvas');
@@ -7,6 +7,7 @@ const sceneManager = new SceneManager('gameCanvas');
 sceneManager.switchScene('level');
 
 let lastRenderTime = 0;
+
 
 function gameLoop(currentTime) {
     const deltaTime = currentTime - lastRenderTime;
