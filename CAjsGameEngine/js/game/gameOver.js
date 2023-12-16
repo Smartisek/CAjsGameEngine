@@ -1,6 +1,8 @@
 import Game from '../engine/game.js';
 import Jetpack from './jetpack.js';
 import Input from '../engine/input.js';
+// import Images from '../engine/resources.js';
+// import Renderer from '../engine/renderer.js';
 
 class GameOver extends Game{
     constructor(canvasId){

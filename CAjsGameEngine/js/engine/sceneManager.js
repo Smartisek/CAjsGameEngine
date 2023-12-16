@@ -2,6 +2,8 @@ import myLevel from '../game/myLevel.js';
 import Menu from '../game/menu.js';  
 import Component from './component.js';
 import Player from '../game/player.js';
+import GameOver from '../game/gameOver.js';
+import GameWin from '../game/gameWin.js';
 
 class SceneManager extends Component{
     constructor(canvasId){
@@ -10,6 +12,8 @@ class SceneManager extends Component{
         this.scenes = {
             menu: new Menu(canvasId),
             level: new myLevel(canvasId),
+            gameOver: new GameOver(canvasId),
+            gameWin: new GameWin(canvasId),
         };
     }
         switchScene(sceneName){

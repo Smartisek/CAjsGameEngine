@@ -171,9 +171,9 @@ class Player extends GameObject {
     }
 
     // Check if player has no lives left
-    if (this.lives <= 0) {
-      this.resetGame();
-    }
+    // if (this.lives <= 0) {
+    //   this.resetGame();
+    // }
 
     // Check if player has collected all collectibles
     if (this.score >= 3) {

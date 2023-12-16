@@ -26,7 +26,13 @@ function gameLoop(currentTime) {
     if(currentScene == sceneManager.scenes.menu && input.isKeyDown('Enter')){
         sceneManager.switchScene('level')
     }
+
+    if(currentScene == sceneManager.scenes.level && player.lives <= 0){
+        sceneManager.switchScene('gameOver');
+    }
+
     requestAnimationFrame(gameLoop);
 }
 
 requestAnimationFrame(gameLoop);
+
