@@ -1,10 +1,12 @@
 import Game from "./engine/game.js";
 import SceneManager from "./engine/sceneManager.js";
 import Player from "./game/player.js";
+import Input from "./engine/input.js";
 
+const input = new Input();
 const game = new Game('gameCanvas');
 const sceneManager = new SceneManager('gameCanvas');    
-sceneManager.switchScene('level');
+sceneManager.switchScene('menu');
 
 let lastRenderTime = 0;
 
@@ -19,6 +21,10 @@ function gameLoop(currentTime) {
     if(player && player.score > 1){
         console.log('now');
         sceneManager.switchScene('menu');
+    }
+
+    if(currentScene == sceneManager.scenes.menu && input.isKeyDown('Enter')){
+        sceneManager.switchScene('level')
     }
     requestAnimationFrame(gameLoop);
 }

@@ -14,10 +14,12 @@ class SceneManager extends Component{
     }
         switchScene(sceneName){
             const currentScene = this.getCurrentScene();
-            if(currentScene){
-                const player = currentScene.gameObjects.find(obj => obj instanceof Player);
-                console.log("players score was: " + player.score);
-            }
+            // if(currentScene){
+            //     const player = currentScene.gameObjects.find(obj => obj instanceof Player);
+            //     console.log("players score was: " + player.score);
+            // }
+            // console.log(this.getPlayerScore());
+
             if(this.scenes[sceneName]){
                 this.currentScene = this.scenes[sceneName];
                 this.currentScene.start();
@@ -30,6 +32,13 @@ class SceneManager extends Component{
             return this.currentScene;
         }
 
+    //     getPlayerScore(){
+    //         const currentScene = this.getCurrentScene();
+    //         if(currentScene){
+    //         const player = currentScene.gameObjects.find(obj => obj instanceof Player);
+    //         return player.score;
+    //     }
+    // }
 }
 
 export default SceneManager;

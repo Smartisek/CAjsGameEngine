@@ -2,7 +2,7 @@ import Game from '../engine/game.js';
 import Jetpack from './jetpack.js';
 import Input from '../engine/input.js';
 
-class Menu extends Game{
+class GameOver extends Game{
     constructor(canvasId){
         super(canvasId);
 
@@ -22,4 +22,4 @@ class Menu extends Game{
     }
 }
 
-export default Menu;
+export default GameOver;
