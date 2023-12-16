@@ -1,10 +1,25 @@
+import Game from "./engine/game.js";
+import SceneManager from "./sceneManager.js";
+import Player from "./game/player.js";
 
-// import myLevel from "./game/myLevel.js";
-import SceneManager from "./sceneManager";
+const game = new Game('gameCanvas');
+const sceneManager = new SceneManager('gameCanvas');    
+sceneManager.switchScene('level');
 
-// // Create a new instance of the Level class with 'gameCanvas' as the canvas ID.
-// // const game = new Level('gameCanvas');
-// const game = new myLevel('gameCanvas');
-// // Start the game by calling the start method of the Level instance.
-// game.start();
+let lastRenderTime = 0;
 
+function gameLoop(currentTime) {
+    const deltaTime = currentTime - lastRenderTime;
+    lastRenderTime = currentTime;
+
+    game.update(deltaTime); 
+    const currentScene = sceneManager.getCurrentScene();
+    const player = currentScene.gameObjects.find(obj => obj instanceof Player);
+    if(player && player.score > 1){
+        console.log('now');
+        sceneManager.switchScene('menu');
+    }
+    requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);

@@ -1,6 +1,7 @@
 // This class depends on the Camera, which is a separate module and needs to be imported.
 import Camera from './camera.js';
 
+
 // The Game class is responsible for setting up and managing the main game loop.
 class Game {
   // The constructor initializes a new instance of the Game class.
@@ -21,6 +22,7 @@ class Game {
     this.resizeCanvas();
     // Add an event listener to resize the canvas whenever the window size changes.
     window.addEventListener('resize', () => this.resizeCanvas());
+
     // Instantiate a new camera without a target and with dimensions equal to the canvas size.
     this.camera = new Camera(null, this.canvas.width, this.canvas.height);
   }
@@ -43,6 +45,8 @@ class Game {
     this.deltaTime = (currentFrameTime - this.lastFrameTime) / 1000;
     // Update the last frame time.
     this.lastFrameTime = currentFrameTime;
+
+
 
     // Update all game objects and the camera.
     this.update();
@@ -113,6 +117,10 @@ class Game {
 
     // Restart the game.
     this.start();
+  }
+
+  pause(){
+    this.deltaTime =0;
   }
 }
 

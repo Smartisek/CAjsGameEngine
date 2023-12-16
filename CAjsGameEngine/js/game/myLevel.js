@@ -9,25 +9,22 @@ import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
 import SceneManager from '../sceneManager.js';
+import Asteroid from './asteroid.js';
 
 class myLevel extends Game {
 
     constructor(canvasId) {
         super(canvasId);
-      
-        const player = new Player(0, this.canvas.height);
-        this.addGameObject(player);
+        // const sc = new SceneManager(canvasId);
+        this.player = new Player(200, this.canvas.height);
+        this.addGameObject(this.player);
 
-
-        this.camera.target = player;
-
+        this.camera.target = this.player;
         const platformWidth = 500;
         const platforms = [
             // First floor 
             new Platform(-20, this.canvas.height/2, platformWidth),
             new Platform(650, this.canvas.height/2, platformWidth),
-
-
             
             // Second floor 
             new Platform(55, 180, platformWidth),
@@ -77,9 +74,17 @@ class myLevel extends Game {
 
         const jetpack = new Jetpack(60, 0);
         this.addGameObject(jetpack);
+
+        // const asteroids= [
+        //     new Asteroid(1000, -100),
+        // ]
+
+        // for(const asteroid of asteroids){
+        //     this.addGameObject(asteroid);
+        // }  
+
     }
 
-       
 }
 
 export default myLevel;

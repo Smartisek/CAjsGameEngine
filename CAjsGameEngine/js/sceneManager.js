@@ -1,17 +1,16 @@
 import myLevel from './game/myLevel.js';
 import Menu from './game/menu.js';  
-import Input from './engine/input.js';
-import GameObject from './engine/gameobject.js';
+import Player from './game/player.js';
+import Component from './engine/component.js';
 
-class SceneManager{
+class SceneManager extends Component{
     constructor(canvasId){
-
+        super(canvasId);
         this.currentScene = null;
         this.scenes = {
             menu: new Menu(canvasId),
             level: new myLevel(canvasId),
         };
-
     }
         switchScene(sceneName){
             if(this.scenes[sceneName]){
@@ -21,11 +20,26 @@ class SceneManager{
                 console.error(`Scene ${sceneName} does not exist!`);
             }
         }
+
+        getCurrentScene(){
+            return this.currentScene;
+        }
+
+        // update(deltaTime){
+        //     console.log('updating scene');
+        //     // const player = this.currentScene.gameObjects.find(obj => obj instanceof Player);
+        //     // if(player.score > 1){
+        //     //     this.switchScene('menu');
+        //     //     console.log('switching scene');
+        //     // }
+        //     super.update(deltaTime);
+        // }
 }
 
 
-const sceneManager = new SceneManager('gameCanvas');
-sceneManager.switchScene('level');
+// debugger;
+// const sceneManager = new SceneManager('gameCanvas');
+// sceneManager.switchScene('level');
 
 export default SceneManager;
 

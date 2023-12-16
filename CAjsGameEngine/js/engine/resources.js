@@ -7,6 +7,7 @@ const Images = {
   trampoline: new Image(),
   sign: new Image(),
   jetpack: new Image(),
+  asteroid: new Image(),
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
@@ -31,5 +32,7 @@ Images.trampoline.src = './resources/images/map/trampoline.png';
 Images.sign.src = './resources/images/map/sign.png';
 
 Images.jetpack.src = './resources/images/map/jetpack.png';
+
+Images.asteroid.src = './resources/images/map/asteroid.png';
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };

@@ -12,14 +12,15 @@ import Ladder from '../game/ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
-import SceneManager from '../sceneManager.js';
+
+
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
-  constructor(x, y, sceneManager) {
-    super(x, y); // Call parent's constructor
-    this.sceneManager = sceneManager;
+  constructor(x, y) {
+    super(x, y);
+    // this.sceneManager = sc;
     this.renderer = new Renderer('blue', 35, 35, Images.player); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
@@ -50,7 +51,7 @@ class Player extends GameObject {
   update(deltaTime) {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
-    const sceneManager = this.getComponent(SceneManager); //get scene manager to switch scenes
+
 
     // Handle player movement
     if (input.isKeyDown('KeyD')) {
@@ -73,7 +74,7 @@ class Player extends GameObject {
     }
 
     if(input.isKeyDown('KeyM')){
-      this.sceneManager.switchScene('menu');
+      this.game.stop();
       console.log("menu");
     }
 
@@ -171,7 +172,7 @@ class Player extends GameObject {
 
     // Check if player has no lives left
     if (this.lives <= 0) {
-      location.reload();
+      this.resetGame();
     }
 
     // Check if player has collected all collectibles
@@ -282,7 +283,7 @@ checkBulletRange(){
 
   resetPlayerState() {
     // Reset the player's state, repositioning it and nullifying movement
-    this.x = this.game.canvas.width / 2;
+    this.x = 200;
     this.y = this.game.canvas.height / 2;
     this.getComponent(Physics).velocity = { x: 0, y: 0 };
     this.getComponent(Physics).acceleration = { x: 0, y: 0 };
