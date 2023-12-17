@@ -122,6 +122,12 @@ class Game {
   pause(){
     this.deltaTime =0;
   }
+
+  stop(){
+    this.isRunning = false;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+  }
 }
 
 // The Game class is then exported as the default export of this module.

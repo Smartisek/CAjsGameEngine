@@ -16,7 +16,7 @@ class myLevel extends Game {
     constructor(canvasId) {
         super(canvasId);
         // const sc = new SceneManager(canvasId);
-        this.player = new Player(200, this.canvas.height);
+        this.player = new Player(200, 300);
         this.addGameObject(this.player);
 
         this.camera.target = this.player;
@@ -33,6 +33,8 @@ class myLevel extends Game {
             new Platform(0, -100, platformWidth/2),
             // 3rd floor
             new Platform(1600, -610, platformWidth/2),
+            new Platform(0, -610, platformWidth/2),
+            new Platform(800, -610, platformWidth/2),
         ];
             for (const platform of platforms) {
                 this.addGameObject(platform);
@@ -43,11 +45,14 @@ class myLevel extends Game {
 
         const enemies = [
             new Enemy(1050, this.canvas.height/2.3),
-            new Enemy(40, this.canvas.height/2.3),
-            new Enemy(750, 130),
-            new Enemy(900, 130),
-            new Enemy(800, -60),
-            new Enemy(-10, -60),
+            new Enemy(0, this.canvas.height/2.3),
+            new Enemy(60, this.canvas.height/2.3),
+            new Enemy(750, 120),
+            new Enemy(900, 120),
+            new Enemy(800, -90),
+            new Enemy(-10, -90),
+            new Enemy(1600, -600),
+            new Enemy(0, -600),
         ]
 
         for(const enemy of enemies){
@@ -75,14 +80,29 @@ class myLevel extends Game {
         const jetpack = new Jetpack(60, 0);
         this.addGameObject(jetpack);
 
-        // const asteroids= [
-        //     new Asteroid(1000, -100),
-        // ]
+        const asteroids= [
+            new Asteroid(this.getRandom(0, this.canvas.width), -300 - this.canvas.height/2, 100),
+            new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
+            new Asteroid(this.getRandom(0, this.canvas.width), -200 - this.canvas.height/2, 100),
+            new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
+        ]
 
-        // for(const asteroid of asteroids){
-        //     this.addGameObject(asteroid);
-        // }  
+        for(const asteroid of asteroids){
+            this.addGameObject(asteroid);
+        }  
 
+    }
+
+    // update(deltaTime) {
+    //     const asteroid = this.gameObjects.find(obj => obj instanceof Asteroid);
+    //     if(asteroid.y > this.canvas.height){
+    //         this.asteroid.y = -300 - this.canvas.height/2;
+    //     }
+    //     super.update(deltaTime);
+    // }
+
+    getRandom(min, max){
+        return Math.random() * (max - min) + min;
     }
 
 }

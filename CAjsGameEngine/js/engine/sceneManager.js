@@ -17,7 +17,7 @@ class SceneManager extends Component{
         };
     }
         switchScene(sceneName){
-            const currentScene = this.getCurrentScene();
+            // const currentScene = this.getCurrentScene();
             // if(currentScene){
             //     const player = currentScene.gameObjects.find(obj => obj instanceof Player);
             //     console.log("players score was: " + player.score);

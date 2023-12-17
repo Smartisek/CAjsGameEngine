@@ -1,10 +1,8 @@
 import Game from '../engine/game.js';
-import Jetpack from './jetpack.js';
 import Input from '../engine/input.js';
 import GameObject from '../engine/gameobject.js';
 import UI from '../engine/ui.js';
 import Asteroid from './asteroid.js';
-import SceneManager from '../engine/sceneManager.js';
 
 class Menu extends Game{
     constructor(canvasId){
@@ -39,10 +37,7 @@ class Menu extends Game{
     }
 
     update(deltaTime){
-        // const getScore = this.sceneManager.getPlayerScore();
-        // console.log(getScore);
-        
-
+        super.isRunning = false;
       super.update(deltaTime);
     }
 }

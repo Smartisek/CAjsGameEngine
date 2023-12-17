@@ -20,7 +20,7 @@ function gameLoop(currentTime) {
     const player = currentScene.gameObjects.find(obj => obj instanceof Player);
     if(player && player.score > 1){
         console.log('now');
-        sceneManager.switchScene('menu');
+        sceneManager.switchScene('gameWin');
     }
 
     if(currentScene == sceneManager.scenes.menu && input.isKeyDown('Enter')){
@@ -29,6 +29,10 @@ function gameLoop(currentTime) {
 
     if(currentScene == sceneManager.scenes.level && player.lives <= 0){
         sceneManager.switchScene('gameOver');
+    }
+
+    if(currentScene == sceneManager.scenes.level && player.score >= 9){
+        sceneManager.switchScene('gameWin');
     }
 
     requestAnimationFrame(gameLoop);
