@@ -14,3 +14,9 @@
 - when we first open the game, the enemies just fall out the canvas, so when run i need to refresh one time and then everything works 
 - sounds, my sounds need to be somehow loop, for example fire bullet does not work for every click, only after sound if finished playing
 - game is not really creative due to me focusing on trying to upgrade the whole engine with for example scenes and game manager
+- would be nice to get the players score after ending the game 
+
+
+****** VIDEO ******
+https://youtu.be/wl5psFtm8Vw?si=rsuDsERBwrD7gpah
+

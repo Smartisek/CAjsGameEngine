@@ -243,10 +243,10 @@ checkBulletRange(){
 
   collidedWithEnemy() {
     // Checks collision with an enemy and reduce player's life if not invulnerable
-    AudioFiles.hurt.play();
     if (!this.isInvulnerable) {
       this.lives--;
       this.isInvulnerable = true;
+      AudioFiles.hurt.play();
       // Make player vulnerable again after 2 seconds
       setTimeout(() => {
         this.isInvulnerable = false;

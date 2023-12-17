@@ -36,7 +36,6 @@ function gameLoop(currentTime) {
 
     // when current scene is level and player has no lives, call game over scene 
     if(currentScene == sceneManager.scenes.level && player.lives <= 0){
-        game.pause();
         sceneManager.switchScene('gameOver');
     }
 

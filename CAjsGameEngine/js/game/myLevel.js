@@ -16,15 +16,15 @@ class myLevel extends Game {
     constructor(canvasId) {
         super(canvasId);
         // const sc = new SceneManager(canvasId);
-        this.player = new Player(200, this.canvas.height/1.4);
+        this.player = new Player(200, this.canvas.height/2);
         this.addGameObject(this.player);
 
         this.camera.target = this.player;
         const platformWidth = 500;
         const platforms = [
             // First floor 
-            new Platform(-20, this.canvas.height/1.6, platformWidth),
-            new Platform(650, this.canvas.height/1.6, platformWidth),
+            new Platform(-20, this.canvas.height/2, platformWidth),
+            new Platform(650, this.canvas.height/2, platformWidth),
             
             // Second floor 
             new Platform(55, 180, platformWidth),

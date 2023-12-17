@@ -7,6 +7,7 @@ import GameObject from '../engine/gameobject.js';
 class GameWin extends Game{
     constructor(canvasId){
         super(canvasId);
+        //Creating an instance of game object to be able to add components to this scene below with UIs
         this.objectInstance = new GameObject(this.canvas.width/2,this.canvas.height/2);
         this.addGameObject(this.objectInstance);
 
