@@ -9,6 +9,7 @@ class GameOver extends Game{
         super(canvasId);
         this.objectInstance = new GameObject(this.canvas.width/2,this.canvas.height/2);
         this.addGameObject(this.objectInstance);
+        // const input = new Input();
 
         this.uiComponents = [
             new UI("You lost!", this.canvas.width/2, 50, '70px Garamond', "white", "center"),
@@ -27,6 +28,14 @@ class GameOver extends Game{
       
         this.camera.target = asteroid;
     }
+
+    update(deltaTime){
+        if(this.input.isKeyDown("Enter")){
+            location.reload();
+        }
+      super.update(deltaTime);
+    }
+    
 }
 
 export default GameOver;
