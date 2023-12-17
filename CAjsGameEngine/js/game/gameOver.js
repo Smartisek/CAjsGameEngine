@@ -1,26 +1,31 @@
 import Game from '../engine/game.js';
-import Jetpack from './jetpack.js';
 import Input from '../engine/input.js';
-// import Images from '../engine/resources.js';
-// import Renderer from '../engine/renderer.js';
+import UI from '../engine/ui.js';
+import Asteroid from './asteroid.js';
+import GameObject from '../engine/gameobject.js';
 
 class GameOver extends Game{
     constructor(canvasId){
         super(canvasId);
+        this.objectInstance = new GameObject(this.canvas.width/2,this.canvas.height/2);
+        this.addGameObject(this.objectInstance);
 
-
+        this.uiComponents = [
+            new UI("You lost!", this.canvas.width/2, 50, '70px Garamond', "white", "center"),
+            new UI("Better luck next time!", this.canvas.width/2, 120, '70px Garamond', "white", "center"),
+           
+        ]
         
-        this.input = new Input();
-        const jetpack = new Jetpack(this.canvas.width/2, this.canvas.height/2);
-        this.addGameObject(jetpack);
-        this.camera.target = jetpack;
-    }
+        for(const ui of this.uiComponents){
+            this.objectInstance.addComponent(ui);
+        }
 
-    update(deltaTime){
-        // const getScore = this.sceneManager.getPlayerScore();
-        // console.log(getScore);
-     
-      super.update(deltaTime);
+        const asteroid = new Asteroid(1500, 1500 ,300);
+        this.addGameObject(asteroid);
+
+        this.input = new Input();
+      
+        this.camera.target = asteroid;
     }
 }
 

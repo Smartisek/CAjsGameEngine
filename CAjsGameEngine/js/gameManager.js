@@ -31,7 +31,7 @@ function gameLoop(currentTime) {
         sceneManager.switchScene('gameOver');
     }
 
-    if(currentScene == sceneManager.scenes.level && player.score >= 9){
+    if(currentScene == sceneManager.scenes.level && player.score >= 2){
         sceneManager.switchScene('gameWin');
     }
 

@@ -28,7 +28,7 @@ class Menu extends Game{
         // this.uiTutorial = new UI("Movement LEFT/RIGHT: A/D", this.canvas.width/2, 150, '30px Arial', "black", "center");
         // this.objectInstance.addComponent(this.uiComponent);
 
-        const asteroid = new Asteroid(1500, 1500 ,400);
+        const asteroid = new Asteroid(1500, 1500 ,300);
         this.addGameObject(asteroid);
 
         this.input = new Input();

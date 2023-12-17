@@ -23,8 +23,8 @@ class myLevel extends Game {
         const platformWidth = 500;
         const platforms = [
             // First floor 
-            new Platform(-20, this.canvas.height/2, platformWidth),
-            new Platform(650, this.canvas.height/2, platformWidth),
+            new Platform(-20, this.canvas.height/1.6, platformWidth),
+            new Platform(650, this.canvas.height/1.6, platformWidth),
             
             // Second floor 
             new Platform(55, 180, platformWidth),
@@ -80,16 +80,16 @@ class myLevel extends Game {
         const jetpack = new Jetpack(60, 0);
         this.addGameObject(jetpack);
 
-        const asteroids= [
-            new Asteroid(this.getRandom(0, this.canvas.width), -300 - this.canvas.height/2, 100),
-            new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
-            new Asteroid(this.getRandom(0, this.canvas.width), -200 - this.canvas.height/2, 100),
-            new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
-        ]
+        // const asteroids= [
+        //     new Asteroid(this.getRandom(0, this.canvas.width), -300 - this.canvas.height/2, 100),
+        //     new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
+        //     new Asteroid(this.getRandom(0, this.canvas.width), -200 - this.canvas.height/2, 100),
+        //     new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
+        // ]
 
-        for(const asteroid of asteroids){
-            this.addGameObject(asteroid);
-        }  
+        // for(const asteroid of asteroids){
+        //     this.addGameObject(asteroid);
+        // }  
 
     }
 
