@@ -13,8 +13,10 @@ const Images = {
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
-  jump: './resources/audio/jump.mp3', // The file path of the jump sound.
-  collect: './resources/audio/collect.mp3', // The file path of the collect sound.
+  fire: new Audio(),
+  hurt: new Audio(),
+  collect: new Audio(),
+  jetpack: new Audio(),
   // Add more audio file paths as needed
 };
 
@@ -37,5 +39,13 @@ Images.jetpack.src = './resources/images/map/jetpack.png';
 Images.asteroid.src = './resources/images/map/asteroid.png';
 
 Images.gameOver.src = './resources/images/UI/gameover.png';
+// Audios
+AudioFiles.fire.src = './resources/sounds/fire.mp3';
+
+AudioFiles.hurt.src = './resources/sounds/hurt.mp3';
+
+AudioFiles.collect.src = './resources/sounds/collect.mp3';
+
+AudioFiles.jetpack.src = './resources/sounds/jetpack.mp3';
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };

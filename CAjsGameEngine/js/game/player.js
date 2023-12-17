@@ -12,6 +12,7 @@ import Ladder from '../game/ladder.js';
 import Trampoline from './trampoline.js';
 import Jetpack from './jetpack.js';
 import Bullet from './bullet.js';
+import { AudioFiles } from '../engine/resources.js';
 
 
 
@@ -197,6 +198,7 @@ class Player extends GameObject {
 
   //when function called, create a new bullet instance and push it into an array of bullets 
   fireBullet(){
+    AudioFiles.fire.play();
     const bullet = new Bullet(this.x, this.y+15, 5,5, "blue", this.direction); //this.direction is to determine which way to go(it is the direction of player)
     this.bullets.push(bullet);
     for(const bullet of this.bullets){ //go through all the bullets added into an array and add them into the game 
@@ -228,6 +230,7 @@ checkBulletRange(){
 
 // when flying with jetpack emit particles for jetpack and set velocity y to -200 to go up 
   jetpackFly(){
+    // AudioFiles.jetpack.play();
     this.getComponent(Physics).velocity.y = -200;
     this.emitJetpackParticels();
   }
@@ -253,6 +256,7 @@ checkBulletRange(){
 
   collidedWithEnemy() {
     // Checks collision with an enemy and reduce player's life if not invulnerable
+    AudioFiles.hurt.play();
     if (!this.isInvulnerable) {
       this.lives--;
       this.isInvulnerable = true;
@@ -265,6 +269,7 @@ checkBulletRange(){
 
   collect(collectible) {
     // Handle collectible pickup
+    AudioFiles.collect.play();
     this.score += collectible.value; //updating score variable with picked up value of collectible 
     console.log(`Score: ${this.score}`);
     this.emitCollectParticles(collectible);

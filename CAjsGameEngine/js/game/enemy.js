@@ -9,6 +9,7 @@ import Physics from '../engine/physics.js';
 
 // Import the Images object from the 'engine' directory. This object contains all the game's image resources
 import {Images} from '../engine/resources.js';
+import { AudioFiles } from '../engine/resources.js';
 
 // Import the Player and Platform classes from the current directory
 import Player from './player.js';
@@ -94,6 +95,7 @@ class Enemy extends GameObject {
     const bullets = this.game.gameObjects.filter(obj => obj instanceof Bullet);
     for(const bullet of bullets){
       if(physics.isCollidingCircleRect(bullet.getComponent(Physics))){  //if they collide, remove enemy and bullet too
+        AudioFiles.hurt.play();
         this.enemyHealth--;
         this.game.removeGameObject(bullet);
         player.bullets.splice(player.bullets.indexOf(bullet), 1); //we also need to remove from bullet array becuase if we were to fire again, the bullet that 
