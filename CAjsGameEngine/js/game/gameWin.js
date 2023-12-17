@@ -10,9 +10,11 @@ class GameWin extends Game{
         this.objectInstance = new GameObject(this.canvas.width/2,this.canvas.height/2);
         this.addGameObject(this.objectInstance);
 
+        //text for game over screen
         this.uiComponents = [
             new UI("Congratulations!", this.canvas.width/2, 50, '70px Garamond', "white", "center"),
             new UI("You won!", this.canvas.width/2, 120, '70px Garamond', "white", "center"),
+            new UI("Press Enter to restart", this.canvas.width/2, 210, '70px Garamond', "white", "center")
            
         ]
         
@@ -25,7 +27,15 @@ class GameWin extends Game{
 
         this.input = new Input();
       
+        //camera needs some game object to target
         this.camera.target = asteroid;
+    }
+
+    update(deltaTime){
+        if(this.input.isKeyDown("Enter")){
+            location.reload();
+        }
+      super.update(deltaTime);
     }
 }
 

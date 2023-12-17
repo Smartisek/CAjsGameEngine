@@ -16,7 +16,7 @@ class myLevel extends Game {
     constructor(canvasId) {
         super(canvasId);
         // const sc = new SceneManager(canvasId);
-        this.player = new Player(200, 300);
+        this.player = new Player(200, this.canvas.height/1.4);
         this.addGameObject(this.player);
 
         this.camera.target = this.player;
@@ -42,23 +42,16 @@ class myLevel extends Game {
 
 
         this.addGameObject(new PlayerUI(10, 10));
-
-        const enemies = [
-            new Enemy(1050, this.canvas.height/2.3),
-            new Enemy(0, this.canvas.height/2.3),
-            new Enemy(60, this.canvas.height/2.3),
-            new Enemy(750, 120),
-            new Enemy(900, 120),
-            new Enemy(800, -90),
-            new Enemy(-10, -90),
-            new Enemy(1600, -600),
-            new Enemy(0, -600),
-        ]
-
-        for(const enemy of enemies){
-            this.addGameObject(enemy);
-        }
-
+//add all enemies, i previously did this with for loop but i was getting errors with spawning 
+            this.addGameObject(new Enemy(900, this.canvas.height/2));
+            this.addGameObject(new Enemy(0, this.canvas.height/2));
+            this.addGameObject(new Enemy(60, this.canvas.height/2));
+            this.addGameObject(new Enemy(750, 120));
+            this.addGameObject(new Enemy(900, 120));
+            this.addGameObject(new Enemy(800, -90));
+            this.addGameObject(new Enemy(-10, -90));
+            this.addGameObject(new Enemy(1600, -600));
+            this.addGameObject(new Enemy(0, -600));
         
         const ladders = [
             new Ladder(710, -100),
@@ -77,9 +70,11 @@ class myLevel extends Game {
             this.addGameObject(trampoline);
         }
 
-        const jetpack = new Jetpack(60, 0);
+        const jetpack = new Jetpack(60, -250);
         this.addGameObject(jetpack);
 
+
+//I also wanted to get an asteroids that player has to dodge but due to time I just commented it out         
         // const asteroids= [
         //     new Asteroid(this.getRandom(0, this.canvas.width), -300 - this.canvas.height/2, 100),
         //     new Asteroid(this.getRandom(0, this.canvas.width), -100 - this.canvas.height/2, 100),
@@ -100,7 +95,7 @@ class myLevel extends Game {
     //     }
     //     super.update(deltaTime);
     // }
-
+//function for random asteroid spawn but not being used
     getRandom(min, max){
         return Math.random() * (max - min) + min;
     }

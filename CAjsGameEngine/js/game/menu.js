@@ -18,6 +18,7 @@ class Menu extends Game{
             new UI("Climb ladder: W", this.canvas.width/2, 200, '20px Garamond', "white", "center"),
             new UI("Fly Jetpack: Hold Space", this.canvas.width/2, 230, '20px Garamond', "white", "center"),
             new UI("Shoot: Left CTRL", this.canvas.width/2, 260, '20px Garamond', "white", "center"),
+            new UI("Pause: HOLD P", this.canvas.width/2, 290, '20px Garamond', "white", "center"),
         ]
         
         for(const ui of this.uiComponents){

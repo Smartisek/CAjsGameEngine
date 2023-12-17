@@ -107,8 +107,6 @@ class Enemy extends GameObject {
           this.game.addGameObject(collectible);
         }
       }
-      
-      
       }
     // Call the update method of the superclass (GameObject), passing along deltaTime
     super.update(deltaTime);

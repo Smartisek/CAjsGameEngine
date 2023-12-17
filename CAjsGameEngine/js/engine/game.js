@@ -119,10 +119,11 @@ class Game {
     this.start();
   }
 
+  //setting delta timet to zero which pauses the game 
   pause(){
     this.deltaTime =0;
   }
-
+// wanted to create a function to stop game and cler the screen but didnt really get to finish that part 
   stop(){
     this.isRunning = false;
     this.deltaTime = 0;

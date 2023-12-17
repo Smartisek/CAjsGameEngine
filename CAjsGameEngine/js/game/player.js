@@ -22,7 +22,7 @@ class Player extends GameObject {
   constructor(x, y) {
     super(x, y);
     // this.sceneManager = sc;
-    this.renderer = new Renderer('blue', 35, 35, Images.player); // Add renderer
+    this.renderer = new Renderer('blue', 35, 45, Images.player); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
@@ -74,11 +74,6 @@ class Player extends GameObject {
       this.updateJump(deltaTime);
     }
 
-    if(input.isKeyDown('KeyM')){
-      this.game.stop();
-      console.log("menu");
-    }
-
     //when boolean jetpackon is true and we press jump space, we can now fly since we picked up a jetpack
     if(this.jetpackOn && input.isKeyDown("Space")){
       this.jetpackFly();
@@ -87,7 +82,7 @@ class Player extends GameObject {
     //when control pressed and canfire is true, fire bullets 
     if(input.isKeyDown('ControlLeft') && this.canFire){
       this.fireBullet();
-      
+      this.emitBulletParticles();
     }
 
     //when firing bullets, we need to check if they are out of canvas and remove them for performance reasons 
@@ -191,7 +186,7 @@ class Player extends GameObject {
   //when function called, create a new bullet instance and push it into an array of bullets 
   fireBullet(){
     AudioFiles.fire.play();
-    const bullet = new Bullet(this.x, this.y+15, 5,5, "blue", this.direction); //this.direction is to determine which way to go(it is the direction of player)
+    const bullet = new Bullet(this.x, this.y+15, 5,5, "black", this.direction); //this.direction is to determine which way to go(it is the direction of player)
     this.bullets.push(bullet);
     for(const bullet of this.bullets){ //go through all the bullets added into an array and add them into the game 
       this.game.addGameObject(bullet);
@@ -275,6 +270,11 @@ checkBulletRange(){
 
   emitJetpackParticels(){
     const particleSystem = new ParticleSystem(this.x, this.y+20, 'orange', 20, 2, 1);
+    this.game.addGameObject(particleSystem);
+  }
+
+  emitBulletParticles(){
+    const particleSystem = new ParticleSystem(this.x, this.y+20, 'black', 15, 1, 0.5);
     this.game.addGameObject(particleSystem);
   }
 

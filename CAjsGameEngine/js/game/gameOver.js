@@ -12,11 +12,12 @@ class GameOver extends Game{
         // const input = new Input();
 
         this.uiComponents = [
-            new UI("You lost!", this.canvas.width/2, 50, '70px Garamond', "white", "center"),
-            new UI("Better luck next time!", this.canvas.width/2, 120, '70px Garamond', "white", "center"),
+            new UI("You lost!", this.canvas.width/2, 50, '50px Garamond', "white", "center"),
+            new UI("Better luck next time!", this.canvas.width/2, 120, '50px Garamond', "white", "center"),
+            new UI("Press Enter to restart", this.canvas.width/2, 200, '70px Garamond', "white", "center"),
            
         ]
-        
+        //add all ui components 
         for(const ui of this.uiComponents){
             this.objectInstance.addComponent(ui);
         }
@@ -26,9 +27,11 @@ class GameOver extends Game{
 
         this.input = new Input();
       
+        //camera needs some game object to target 
         this.camera.target = asteroid;
     }
 
+    //calling super update and checking input 
     update(deltaTime){
         if(this.input.isKeyDown("Enter")){
             location.reload();

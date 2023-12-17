@@ -8,7 +8,6 @@ const Images = {
   sign: new Image(),
   jetpack: new Image(),
   asteroid: new Image(),
-  gameOver: new Image(),
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
@@ -21,7 +20,7 @@ const AudioFiles = {
 };
 
 // Set the source of the player image.
-Images.player.src = './resources/images/player/mainPlayer.png'; // Update the image path
+Images.player.src = './resources/images/player/player.png'; // Update the image path
 
 // Set the source of the enemy image.
 Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path
@@ -38,7 +37,6 @@ Images.jetpack.src = './resources/images/map/jetpack.png';
 
 Images.asteroid.src = './resources/images/map/asteroid.png';
 
-Images.gameOver.src = './resources/images/UI/gameover.png';
 // Audios
 AudioFiles.fire.src = './resources/sounds/fire.mp3';
 

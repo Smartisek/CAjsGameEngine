@@ -1,0 +1,16 @@
+******  RESOURCES ********
+[enemy png] - https://www.pngfind.com/download/mhbhhm_zombies-2d-game-character-sprites-2d-game-character/
+[platform png] - https://creazilla.com/nodes/1997749-green-top-ground-clipart
+[jetpack png] - https://www.hiclipart.com/free-transparent-background-png-clipart-ohpzp
+[asteroid png] - https://www.pngaaa.com/download/53286
+[player png] - https://www.pngwing.com/en/free-png-ndiet/download
+[hurt sound] - https://freesound.org/people/MATRIXXX_/sounds/486943/
+[collect sound] - https://freesound.org/people/swag1773/sounds/639993/
+[fire sound] - https://freesound.org/people/jacksonacademyashmore/sounds/402816/
+
+
+
+****** PROBLEMS *******
+- when we first open the game, the enemies just fall out the canvas, so when run i need to refresh one time and then everything works 
+- sounds, my sounds need to be somehow loop, for example fire bullet does not work for every click, only after sound if finished playing
+- game is not really creative due to me focusing on trying to upgrade the whole engine with for example scenes and game manager
