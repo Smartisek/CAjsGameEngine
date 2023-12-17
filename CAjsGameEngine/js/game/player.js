@@ -168,19 +168,11 @@ class Player extends GameObject {
   
     // Check if player has fallen off the bottom of the screen
     if (this.y > this.game.canvas.height) {
+      this.lives--;
       this.resetPlayerState();
     }
 
-    // Check if player has no lives left
-    // if (this.lives <= 0) {
-    //   this.resetGame();
-    // }
 
-    // Check if player has collected all collectibles
-    if (this.score >= 3) {
-      console.log('You win!');
-      location.reload();
-    }
 
     super.update(deltaTime);
   }

@@ -125,6 +125,7 @@ class Game {
 
   stop(){
     this.isRunning = false;
+    this.deltaTime = 0;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
   }
